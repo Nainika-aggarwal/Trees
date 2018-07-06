@@ -1,0 +1,48 @@
+/**
+ * Definition for binary tree
+ * class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) {
+ *      val = x;
+ *      left=null;
+ *      right=null;
+ *     }
+ * }
+ */
+public class Solution {
+    int search(ArrayList<Integer> a , int x)
+    {
+        for(int i=0;i<a.size();i++)
+        {
+            if(a.get(i) == x)
+            return i;
+        }
+        return -1;
+    }
+    int preindex = 0;
+    public TreeNode buildTree(ArrayList<Integer> A, ArrayList<Integer> B) {
+        if(B.size() == 0)
+        return null;
+        if(preindex >= A.size())
+        return null;
+        int w = A.get(preindex++);
+        TreeNode t = new TreeNode(w);
+        int x = search(B,w);
+        ArrayList<Integer> a =  new ArrayList<Integer>();
+        ArrayList<Integer> a1 =  new ArrayList<Integer>();
+        for(int i=0;i<x;i++)
+        {
+            a.add(B.get(i));
+        }
+        for(int j=x+1;j<B.size();j++)
+        {
+            a1.add(B.get(j));
+        }
+        t.left = buildTree(A,a);
+        t.right = buildTree(A,a1);
+        return t;
+        
+    }
+}
