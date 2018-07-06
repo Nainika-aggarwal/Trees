@@ -1,0 +1,38 @@
+/**
+ * Definition for binary tree
+ * class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) {
+ *      val = x;
+ *      left=null;
+ *      right=null;
+ *     }
+ * }
+ */
+public class Solution {
+    HashSet inorder(TreeNode A,HashSet h)
+    {
+        if(A != null)
+        {
+            h.add(A.val);
+            h = inorder(A.left,h);
+            h = inorder(A.right,h);
+        }
+        return h;
+    }
+    public int t2Sum(TreeNode A, int B) {
+        HashSet<Integer> h = new HashSet<Integer>();
+        h = inorder(A,h);
+        Iterator<Integer> i = h.iterator();
+        while(i.hasNext())
+        {
+            int x = i.next();
+            int z = B - x;
+            if(h.contains(z) && z !=x && z != B)
+            return 1;
+        }
+        return 0;
+    }
+}
